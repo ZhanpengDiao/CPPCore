@@ -3,6 +3,8 @@
 // originally designed for inheritance
 // the list initialization occurs before the main constructor body
 
+// "const" behaves differently inside a class
+
 #include<iostream>
 using namespace std;
 
