@@ -10,8 +10,8 @@ ofstream out("S.out");
 class S{
     enum { sz = 10 };
     char c[sz]; // to take up space, not used
-    static unsigned char pool[]; // used to hold all S
-    static bool alloc_map[]; // used to check if a position has been taken
+    static unsigned char pool[]; // STORAGE used to hold all S
+    static bool alloc_map[]; // STORAGE used to check if a position has been taken
 public:
     enum { psize = 100 };
     S() { out << "S()" << endl; }
@@ -25,7 +25,7 @@ bool S::alloc_map[psize] = {false};
 
 void* S::operator new(size_t) throw(bad_alloc) {
     for(int i = 0; i < psize; i ++) {
-        if(!alloc_map[i]) {
+        if(!alloc_map[i])  // find an empty space
             out << "using block " << i << " ... ";
             alloc_map[i] = true;
             return (pool + i * sizeof(S)); // initial position,
@@ -36,7 +36,7 @@ void* S::operator new(size_t) throw(bad_alloc) {
 
 void S::operator delete(void* m) {
     if(!m) return;
-    // Assume it was created in pool
+    // ASSUME it was created in pool
     // calculate which block member it is
     unsigned long block = (unsigned long)m - (unsigned long)pool;
     block /= sizeof(S);
