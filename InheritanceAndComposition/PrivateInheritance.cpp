@@ -11,13 +11,13 @@ public:
 
 class Goldfish: Pet { // DEFALUT private inheritance
 public:
-    Pet::eat;
-    Pet::sleep; // all overloaded functions exposed
+    using Pet::eat; // using new syntax ... en...
+    using Pet::sleep; // all overloaded functions exposed
 };
 
 int main() {
     Goldfish bob;
     bob.eat();
     bob.sleep();
-    // bob.speak(); // private functions 
+    // bob.speak(); // private functions
 }
